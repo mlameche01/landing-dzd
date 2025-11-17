@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DZD Token – Fuse Network</title>
+<style>
+ body {
+   font-family: Arial, sans-serif;
+   background: #000;
+   color: #ffd700;
+   text-align: center;
+   padding: 40px;
+ }
+ .card {
+   max-width: 480px;
+   margin: auto;
+   background: #111;
+   padding: 30px;
+   border-radius: 20px;
+   box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+ }
+ img {
+   width: 160px;
+   margin-bottom: 20px;
+ }
+ button {
+   background: #ffd700;
+   color: #000;
+   padding: 12px 20px;
+   margin-top: 15px;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   font-size: 16px;
+   width: 100%;
+ }
+ button:hover { opacity: 0.8; }
+</style>
+</head>
+<body>
+<div class="card">
+  <img src="data:image/png;base64,/9j/6zLnSlB2AAAAAAAAADLdanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAMrdqdW1iAAAAR2p1bWRjMm1hABEA" />
+  <h1>Token DZD – Fuse Mainnet</h1>
+
+  <p><strong>Adresse du contrat :</strong><br>0x56938...a9Aa4</p>
+  <p><strong>Décimales :</strong> 18</p>
+
+  <button onclick="addFuseNetwork()">Ajouter le réseau Fuse à MetaMask</button>
+  <button onclick="addDZDToken()">Ajouter le token DZD à MetaMask</button>
+</div>
+
+<script>
+async function addFuseNetwork() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_addEthereumChain',
+      params: [{
+        chainId: '0x7a',
+        chainName: 'Fuse Mainnet',
+        nativeCurrency: { name: 'FUSE', symbol: 'FUSE', decimals: 18 },
+        rpcUrls: ['https://rpc.fuse.io'],
+        blockExplorerUrls: ['https://explorer.fuse.io']
+      }]
+    });
+    alert('Réseau Fuse ajouté !');
+  } catch (err) {
+    console.error(err);
+    alert('Erreur : ' + err.message);
+  }
+}
+
+async function addDZDToken() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: '0x56938a9aa4',
+          symbol: 'DZD',
+          decimals: 18,
+          image: 'data:image/png;base64,/9j/6zLnSlB2AAAAAAAAADLdanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAMrdqdW1iAAAAR2p1bWRjMm1hABEA'
+        }
+      }
+    });
+    alert('Token DZD ajouté !');
+  } catch (err) {
+    console.error(err);
+    alert('Erreur : ' + err.message);
+  }
+}
+</script>
+
+</body>
+</html>
+
